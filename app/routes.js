@@ -1,4 +1,4 @@
-var Album = require('./models/album');
+var Album = require('./models/albums');
 
     module.exports = function(app) {
 
@@ -6,8 +6,7 @@ var Album = require('./models/album');
 
         // sample api route
         app.get('/api/albums', function(req, res) {
-            // use mongoose to get all nerds in the database
-            Album.find(function(err, nerds) {
+            Album.find(function(err, albums) {
 
                 if (err)
                     res.send(err);

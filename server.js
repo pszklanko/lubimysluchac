@@ -10,6 +10,11 @@ var mongoose       = require('mongoose');
 // config files
 var db = require('./config/db');
 
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // set port
 var port = process.env.PORT || 8080;
 
