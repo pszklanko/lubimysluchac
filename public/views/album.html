@@ -1,5 +1,16 @@
 <div class="jumbotron text-center">
-    <h1>Nerds and Proud</h1>
-
-    <p>{{ tagline }}</p>
+    <h1>Albumy</h1>
+    <form name="addAlbumForm" novalidate ng-submit="addAlbum(newAlbum)">
+      <label>artysta</label>
+      <input name="artist" required type="text" ng-model="newAlbum.artist">
+      <label>tytuł</label>
+      <input name="title" required type="text" ng-model="newAlbum.title">
+      <button type="submit" ng-disabled="addAlbumForm.$invalid">OK</button>
+    </form>
+    <div ng-repeat="album in albums">
+      {{album.artist}}
+      {{album.title}}
+      <!-- TODO fontawesome icons ex. x zamiast usun -->
+      <button ng-click="deleteAlbum(album._id)">USUN</button>
+    </div>
 </div>

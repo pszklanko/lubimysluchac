@@ -8,7 +8,6 @@ $routeProvider
         controller: 'MainController'
     })
 
-    // nerds page that will use the NerdController
     .when('/albums', {
         templateUrl: 'views/album.html',
         controller: 'AlbumController'

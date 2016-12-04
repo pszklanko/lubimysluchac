@@ -5,15 +5,16 @@ angular.module('AlbumService', []).factory('Album', ['$http', function($http) {
             return $http.get('/api/albums');
         },
 
-
-        // call to POST and create a new album
         create : function(albumData) {
-            return $http.post('/api/albums', albumData);
+            return $http.post('/api/album', albumData);
         },
 
-        // call to DELETE a album
+        update : function(albumData) {
+            return $http.put('/api/album', albumData);
+        },
+
         delete : function(id) {
-            return $http.delete('/api/albums/' + id);
+            return $http.delete('/api/album', id);
         }
     }
 
