@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 
 //connect to mongoDB
+mongoose.Promise = global.Promise;
 mongoose.connect(db.url);
 
 // get all data/stuff of the body (POST) parameters
@@ -48,7 +49,3 @@ app.listen(port, function() {
 
 // expose app
 exports = module.exports = app;
-
-// app.get('/', function(request, response) {
-// 	response.send('Hi');
-// });

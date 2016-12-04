@@ -4,8 +4,7 @@ var Album = require('./models/albums');
 
         // server routes ===========================================================
 
-        // sample api route
-        app.get('/api/albums', function(req, res) {
+        app.get('/albums', function(req, res) {
             Album.find(function(err, albums) {
 
                 if (err)
@@ -15,13 +14,45 @@ var Album = require('./models/albums');
             });
         });
 
-        // route to handle creating goes here (app.post)
-        // route to handle delete goes here (app.delete)
+        app.post('/album', function(req, res) {
+          album = new Album();
+          album.title = req.body.title;
+          album.artist = req.body.artist;
+
+          album.save(function(err) {
+            if (err) res.send(err);
+
+            res.json({message: 'Album created!'});
+          })
+        });
+// TODO 'update' and probably 'remove' of NULL element
+        app.put('/album', function(req, res) {
+          Album.findById(req.body.id, function(err, album) {
+            album.update({
+              title: req.body.title,
+              artist: req.body.artist
+            }, function (err, album) {
+              if(err) res.send(err);
+
+              res.json({message: 'Album edited! ' + album.id});
+            });
+          });
+        });
+
+        app.delete('/album', function(req, res) {
+          Album.findById(req.body.id, function(err, album) {
+            album.remove(function (err, album) {
+              if(err) res.send(err);
+
+              res.json({message: 'Album removed! ' + album.id});
+            });
+          });
+        });
 
         // frontend routes =========================================================
         // route to handle all angular requests
         app.get('*', function(req, res) {
-            res.sendfile('./public/views/index.html'); // load our public/index.html file
+            res.sendFile('./public/views/index.html'); // load our public/index.html file
         });
 
     };
