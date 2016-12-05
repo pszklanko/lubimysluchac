@@ -7,10 +7,23 @@
       <input name="title" required type="text" ng-model="newAlbum.title">
       <button type="submit" ng-disabled="addAlbumForm.$invalid">OK</button>
     </form>
-    <div ng-repeat="album in albums">
-      {{album.artist}}
-      {{album.title}}
+
+    <style>
+      .box2 {
+        display: inline-block;
+        width: 20%;
+        height: 200px;
+        margin: 1em;
+        border-style: solid;
+        vertical-align:top;
+      }
+    </style>
+    <div class="box2" ng-repeat="album in albums" ng-mouseenter="active=true"
+    ng-mouseleave="active=false">
+      <p>{{album.artist}}</p>
+      <p>{{album.title}}</p>
       <!-- TODO fontawesome icons ex. x zamiast usun -->
-      <button ng-click="deleteAlbum(album._id)">USUN</button>
+      <i class="fa fa-trash" aria-hidden="true" ng-show="active" ng-click="deleteAlbum(album._id)"></i>
+      <i class="fa fa-pencil" aria-hidden="true" ng-show="active" ng-click="editAlbum(album)"></i>
     </div>
 </div>
