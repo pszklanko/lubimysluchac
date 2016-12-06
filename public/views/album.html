@@ -22,8 +22,22 @@
     ng-mouseleave="active=false">
       <p>{{album.artist}}</p>
       <p>{{album.title}}</p>
-      <!-- TODO fontawesome icons ex. x zamiast usun -->
       <i class="fa fa-trash" aria-hidden="true" ng-show="active" ng-click="deleteAlbum(album._id)"></i>
       <i class="fa fa-pencil" aria-hidden="true" ng-show="active" ng-click="editAlbum(album)"></i>
     </div>
 </div>
+
+
+<script type="text/ng-template" id="myModalContent.html">
+       <div class="modal-header">
+           <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+       </div>
+       <div class="modal-body" id="modal-body">
+         BODY
+       </div>
+       <div class="modal-footer">
+           <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+           <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+       </div>
+</script>
+<button type="button" class="btn btn-default" ng-click="open()">Open me!</button>

@@ -1,1 +1,1 @@
-angular.module('lubimySluchacApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'AlbumCtrl', 'AlbumService']);
+angular.module('lubimySluchacApp', ['ngRoute', 'appRoutes', 'ui.bootstrap', 'MainCtrl', 'AlbumCtrl', 'AlbumService']);
