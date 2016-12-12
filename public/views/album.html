@@ -17,9 +17,63 @@
         border-style: solid;
         vertical-align:top;
       }
+      .modalDialog {
+      	position: fixed;
+      	font-family: Arial, Helvetica, sans-serif;
+      	top: 0;
+      	right: 0;
+      	bottom: 0;
+      	left: 0;
+      	background: rgba(0,0,0,0.8);
+      	z-index: 99999;
+      	opacity:0;
+      	-webkit-transition: opacity 400ms ease-in;
+      	-moz-transition: opacity 400ms ease-in;
+      	transition: opacity 400ms ease-in;
+      	pointer-events: none;
+      }
+      .modalDialog:target {
+	opacity:1;
+	pointer-events: auto;
+}
+
+.modalDialog > div {
+	width: 400px;
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+	background: #606061;
+	color: #FFFFFF;
+	line-height: 25px;
+	position: absolute;
+	right: -12px;
+	text-align: center;
+	top: -10px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
     </style>
-    <div class="box2" ng-repeat="album in albums" ng-mouseenter="active=true"
-    ng-mouseleave="active=false">
+    <div class="box2" ng-repeat="album in albums"
+         ng-mouseenter="active=true"
+         ng-mouseleave="active=false"
+         ng-click="editWindow=!editWindow">
       <p>{{album.artist}}</p>
       <p>{{album.title}}</p>
       <i class="fa fa-trash" aria-hidden="true" ng-show="active" ng-click="deleteAlbum(album._id)"></i>
@@ -28,16 +82,12 @@
 </div>
 
 
-<script type="text/ng-template" id="myModalContent.html">
-       <div class="modal-header">
-           <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
-       </div>
-       <div class="modal-body" id="modal-body">
-         BODY
-       </div>
-       <div class="modal-footer">
-           <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-           <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-       </div>
-</script>
-<button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+<a href="#openModal">Open Modal</a>
+<div id="openModal" class="modalDialog">
+  <div>
+    <a href="#close" title="Close" class="close">X</a>
+    <h2>Modal Box</h2>
+    <p>This is a sample modal box that can be created using the powers of CSS3.</p>
+    <p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
+  </div>
+</div>
