@@ -17,7 +17,8 @@
     "express": "^4.14.0",
     "method-override": "^2.3.7",
     "mongodb": "^2.2.11",
-    "mongoose": "^4.7.0"
+    "mongoose": "^4.7.0",
+    "spdy": "^3.4.4"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
