@@ -1,22 +1,46 @@
-var spdy = require('spdy');
-var fs   = require('fs');
+// var spdy = require('spdy');
+// var fs   = require('fs');
+//
+// var express        = require('express');
+// var bodyParser     = require('body-parser');
+// var methodOverride = require('method-override');
+// var mongoose       = require('mongoose');
+// var app            = express();
 
-var options = {
-  key: ,
-  cert: ,
-  spdy: {
-    protocols: ['h2', 'http/1.1'],
-    plain: false,
-    connection: {
-      windowSize: 1024 * 1024,
-      autoSpdy31: false
-    }
-  }
+const port    = 8080
+const spdy    = require('spdy')
+const express = require('express')
+const path    = require('path')
+const fs      = require('fs')
+
+const app     = express()
+
+app.get('*', (req, res) => {
+    res.writeHead(200);
+    res.end('okk');
+})
+
+const options = {
+  key: fs.readFileSync(__dirname + '/server.key'),
+  cert: fs.readFileSync(__dirname + '/server.crt')
+  // spdy: {
+  //   protocols: ['h2', 'http/1.1'],
+  //   plain: false,
+  //   connection: {
+  //     windowSize: 1024 * 1024,
+  //     autoSpdy31: false
+  //   }
+  // }
 };
 
-var server = spdy.createServer(options, function(req, res) {
-  res.writeHead(200);
-  res.end('Siema!');
-});
-
-server.listen(3000);
+spdy
+  .createServer(options, app)
+  .listen(port, (error) => {
+    if (error) {
+      console.error(error);
+      return process.exit(1);
+    } else {
+      console.log('Listening on port ' + port + '.');
+    }
+  })
+// exports = module.exports = app;
