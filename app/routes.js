@@ -48,6 +48,10 @@ var Album = require('./models/albums');
             });
           });
         });
+        app.get('/empty', function(req, res) {
+          res.writeHead(200);
+          res.end('');
+        });
 
         // frontend routes =========================================================
         app.get('*', function(req, res) {

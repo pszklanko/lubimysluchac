@@ -15,10 +15,37 @@ const fs      = require('fs')
 
 const app     = express()
 
-app.get('*', (req, res) => {
-    res.writeHead(200);
-    res.end('okk');
-})
+app.get('/', (req, res) => {
+  res.send(`hello, http2!
+go to /pushy`)
+});
+
+app.get('/pushy', (req, res) => {
+  var stream = res.push('/libs/angular/angular.min.js', {
+      status: 200, // optional
+      method: 'GET', // optional
+      request: {accept: '*/*'},
+      response: {'content-type': 'application/javascript'}
+    })
+    var stream1 = res.push('/libs/angular-route/angular-route.min.js', {
+        status: 200, // optional
+        method: 'GET', // optional
+        request: {accept: '*/*'},
+        response: {'content-type': 'application/javascript'}
+      })
+      var stream2 = res.push('/libs/angular-bootstrap/ui-bootstrap-tpls.min.js', {
+          status: 200, // optional
+          method: 'GET', // optional
+          request: {accept: '*/*'},
+          response: {'content-type': 'application/javascript'}
+        })
+    stream.on('error', function() {})
+    stream.end('')
+    res.write('<script src="libs/angular/angular.min.js"></script>');
+    res.write('<script src="libs/angular-route/angular-route.min.js"></script>');
+    res.write('<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>');
+    res.end();
+});
 
 const options = {
   key: fs.readFileSync(__dirname + '/server.key'),

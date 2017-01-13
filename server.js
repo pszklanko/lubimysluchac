@@ -1,8 +1,9 @@
 // MODULES ============================================
 var express        = require('express');
-var spdy           = require('spdy');
+var spdy           = require('spdy'); // HTTP/2
+var https          = require('https'); // HTTPS dla HTTP/1.1
 var fs             = require('fs');
-var app            = express();
+var app            = express(); // HTTP/1.1
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose       = require('mongoose');
@@ -40,12 +41,27 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));
 
+// app.get('*', function(req, res) {
+//   var stream = res.push('/libs/angular/angular.min.js', {
+//       status: 200, // optional
+//       method: 'GET', // optional
+//       request: {accept: '*/*'},
+//       response: {'content-type': 'application/javascript'}
+//     })
+//
+//     stream.on('error', function() {})
+//     stream.end('')
+//     res.write('<script src="libs/angular/angular.min.js"></script>');
+//     // res.write('<script src="libs/angular-route/angular-route.min.js"></script>');
+//     // res.write('<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>');
+//     res.end();
+// });
 // routes ==================================================
 require('./app/routes')(app); // configure our routes
 
 const options = {
-  key: fs.readFileSync(__dirname + '/server.key'),
-  cert: fs.readFileSync(__dirname + '/server.crt')
+  key: fs.readFileSync(__dirname + '/server.key'), //privateKey
+  cert: fs.readFileSync(__dirname + '/server.crt') // certificate
 };
 
 // start app ===============================================
@@ -55,7 +71,7 @@ const options = {
 // });
 
 // HTTP/2
-spdy
+https
   .createServer(options, app)
   .listen(port, (error) => {
     if (error) {
@@ -64,6 +80,7 @@ spdy
     } else {
       console.log('Listening on port ' + port + '.');
     }
-  })
+  });
+
 // expose app
 exports = module.exports = app;
