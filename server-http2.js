@@ -23,14 +23,6 @@ app.get('*', (req, res) => {
 const options = {
   key: fs.readFileSync(__dirname + '/server.key'),
   cert: fs.readFileSync(__dirname + '/server.crt')
-  // spdy: {
-  //   protocols: ['h2', 'http/1.1'],
-  //   plain: false,
-  //   connection: {
-  //     windowSize: 1024 * 1024,
-  //     autoSpdy31: false
-  //   }
-  // }
 };
 
 spdy

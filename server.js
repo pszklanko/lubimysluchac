@@ -1,5 +1,7 @@
 // MODULES ============================================
 var express        = require('express');
+var spdy           = require('spdy');
+var fs             = require('fs');
 var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
@@ -41,11 +43,27 @@ app.use(express.static(__dirname + '/public'));
 // routes ==================================================
 require('./app/routes')(app); // configure our routes
 
-// start app ===============================================
-// startup our app at http://localhost:8080
-app.listen(port, function() {
-  console.log('listenin on port ' + port);
-});
+const options = {
+  key: fs.readFileSync(__dirname + '/server.key'),
+  cert: fs.readFileSync(__dirname + '/server.crt')
+};
 
+// start app ===============================================
+// HTTP/1.1
+// app.listen(port, function() {
+//   console.log('listenin on port ' + port);
+// });
+
+// HTTP/2
+spdy
+  .createServer(options, app)
+  .listen(port, (error) => {
+    if (error) {
+      console.error(error);
+      return process.exit(1);
+    } else {
+      console.log('Listening on port ' + port + '.');
+    }
+  })
 // expose app
 exports = module.exports = app;
