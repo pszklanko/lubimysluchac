@@ -56,6 +56,7 @@ var fs             = require('fs');
         });
 
         app.get('/push', function(req, res) {
+          //res.sendFile('/home/ps/lubimysluchac/public/push.html');
           fs.readFile('/home/ps/lubimysluchac/public/push.html', function read(err, data) {
             if(err) {
               throw err;
@@ -79,18 +80,16 @@ var fs             = require('fs');
               throw err;
             }
             content = data;
-          var stream1 = res.push('/libs/jquery/dist/jquery.js', {
-            status: 200, // optional
-            method: 'GET', // optional
-            request: { accept: '*/*' },
-            response: { 'content-type': 'application/javascript' }
+            var stream1 = res.push('/libs/jquery/dist/jquery.js', {
+              status: 200, // optional
+              method: 'GET', // optional
+              request: { accept: '*/*' },
+              response: { 'content-type': 'application/javascript' }
+            })
+            stream1.on('error', function() {})
+            stream1.end(content)
+            res.end();
           })
-          stream1.on('error', function() {
-
-          })
-          stream1.end(content)
-          res.end();
-        })
         })
 
         // frontend routes =========================================================
