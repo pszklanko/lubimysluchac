@@ -41,21 +41,28 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));
 
-// app.get('*', function(req, res) {
-//   var stream = res.push('/libs/angular/angular.min.js', {
-//       status: 200, // optional
-//       method: 'GET', // optional
-//       request: {accept: '*/*'},
-//       response: {'content-type': 'application/javascript'}
-//     })
-//
-//     stream.on('error', function() {})
-//     stream.end('')
-//     res.write('<script src="libs/angular/angular.min.js"></script>');
-//     // res.write('<script src="libs/angular-route/angular-route.min.js"></script>');
-//     // res.write('<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>');
-//     res.end();
+// app.use(function(req, res) {
+//   var stream = res.push('/libs/bootstrap/dist/css/bootstrap.min.css', {
+//      status: 200, // optional
+//      method: 'GET', // optional
+//      request: {accept: '*/*'},
+//      response: {'content-type': 'text/css; charset=UTF-8'}
+//    })
+//    // var stream1 = res.push('/libs/font-awesome/css/font-awesome.min.css', {
+//   //     status: 200, // optional
+//   //     method: 'GET', // optional
+//   //     request: {accept: '*/*'},
+//   //     response: {'content-type': 'text/css; charset=UTF-8'}
+//   //   })
+//    stream.on('error', function() {})
+//    stream.end('')
+//    res.write('<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">');
+//    // res.write('<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">');
+//    // res.write('<script src="libs/angular-route/angular-route.min.js"></script>');
+//    // res.write('<script src="libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>');
+//    res.end();
 // });
+
 // routes ==================================================
 require('./app/routes')(app); // configure our routes
 
@@ -71,7 +78,7 @@ const options = {
 // });
 
 // HTTP/2
-https
+spdy
   .createServer(options, app)
   .listen(port, (error) => {
     if (error) {
