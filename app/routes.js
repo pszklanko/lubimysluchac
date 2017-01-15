@@ -56,22 +56,22 @@ var fs             = require('fs');
         });
 
         app.get('/push', function(req, res) {
-          //res.sendFile('/home/ps/lubimysluchac/public/push.html');
+          // res.sendFile('/home/ps/lubimysluchac/public/push.html');
           fs.readFile('/home/ps/lubimysluchac/public/push.html', function read(err, data) {
             if(err) {
               throw err;
             }
             content = data;
-          var stream = res.push('/push.html', {
-            status: 200, // optional
-            method: 'GET', // optional
-            request: { accept: '*/*' },
-            response: { 'content-type': 'text/html; charset=UTF-8' }
-          })
-          stream.on('error', function() {
-
-          })
-          stream.end(content)
+//          var stream = res.push('/push.html', {
+//            status: 200, // optional
+//            method: 'GET', // optional
+//            request: { accept: '*/*' },
+//            response: { 'content-type': 'text/html; charset=UTF-8' }
+//          })
+//          stream.on('error', function() {
+//
+//          })
+//          stream.end()
           res.write(content)
         })
 
@@ -80,14 +80,14 @@ var fs             = require('fs');
               throw err;
             }
             content = data;
-            var stream1 = res.push('/libs/jquery/dist/jquery.js', {
+            var stream = res.push('/libs/jquery/dist/jquery.js', {
               status: 200, // optional
               method: 'GET', // optional
               request: { accept: '*/*' },
               response: { 'content-type': 'application/javascript' }
             })
-            stream1.on('error', function() {})
-            stream1.end(content)
+            stream.on('error', function() {})
+            stream.end(content)
             res.end();
           })
         })
