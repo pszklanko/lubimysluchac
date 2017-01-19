@@ -62,16 +62,16 @@ var fs             = require('fs');
               throw err;
             }
             content = data;
-//          var stream = res.push('/push.html', {
-//            status: 200, // optional
-//            method: 'GET', // optional
-//            request: { accept: '*/*' },
-//            response: { 'content-type': 'text/html; charset=UTF-8' }
-//          })
-//          stream.on('error', function() {
-//
-//          })
-//          stream.end()
+          var stream = res.push('/push.html', {
+            status: 200, // optional
+            method: 'GET', // optional
+            request: { accept: '*/*' },
+            response: { 'content-type': 'text/html; charset=UTF-8' }
+          })
+          stream.on('error', function() {
+
+          })
+          stream.end()
           res.write(content)
         })
 
