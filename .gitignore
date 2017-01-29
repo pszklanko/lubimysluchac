@@ -1,6 +1,7 @@
 /node_modules
 /config
 /public/libs
+/public/img
 *.crt
 *.csr
 *.key
