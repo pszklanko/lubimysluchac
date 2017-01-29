@@ -16,6 +16,7 @@ angular.module('AlbumCtrl', []).controller('AlbumController', function($scope, $
       .success(function() {
         $scope.newAlbum = {};
         $scope.getAlbums();
+        alert('Dodano album!');
       }).
       error(function(err) {
         console.log(err);
