@@ -16,9 +16,6 @@
     left: 0;
     top: 0;
   }
-  img:hover {
-    display: none;
-  }
 </style>
 
 <div class="jumbotron text-center">
@@ -44,6 +41,6 @@
         <i class="fa fa-trash" aria-hidden="true" ng-show="active" ng-click="deleteAlbum(album._id)"></i>
         <i class="fa fa-pencil" aria-hidden="true" ng-show="active" ng-click="editAlbum(album)"></i>
       </div>
-      <img ng-src="/img/{{album.artist}}.jpg"/>
+      <img ng-hide="active" ng-src="/img/{{album.artist}}.jpg"/>
     </div>
 </div>
