@@ -5,15 +5,13 @@
 </template>
 
 <script setup lang="ts">
-  import axios from 'axios';
   import { ref } from 'vue';
 
+  const emit = defineEmits(['searchTerm']);
   let searchTerm: string = '';
   let result = ref([]);
   function handleSearch() {
-    axios
-        .get('http://localhost:3000/albums', { params: { searchTerm }})
-        .then((res) => result.value = res.data);
+    emit('searchTerm', searchTerm);
   }
 </script>
 

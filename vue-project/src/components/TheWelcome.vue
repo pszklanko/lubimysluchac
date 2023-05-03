@@ -9,17 +9,25 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import Search from '@/components/Search.vue';
 
-let msg = ref('');
+let result = ref('');
+let searchTerm = ref('');
 
-onMounted(() => {
+// onMounted(() => {
+//   axios
+//       .get('http://localhost:3000/albums')
+//       .then(({ data }) => msg.value = data);
+// })
+
+function handler(searchTerm: string) {
   axios
-      .get('http://localhost:3000/albums')
-      .then(({ data }) => msg.value = data);
-})
+      .get('http://localhost:3000/albums', { params: { searchTerm }})
+      .then((res) => result.value = res.data);
+}
 </script>
 
 <template>
-  <Search></Search>
+  <Search @searchTerm="handler"></Search>
+  <li v-for="item in result">{{ item }}</li>
   <WelcomeItem>
     <template #icon>
       <DocumentationIcon />
